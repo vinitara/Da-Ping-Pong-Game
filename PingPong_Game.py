@@ -17,13 +17,13 @@ class Player(GameSprite):
         keys = key.get_pressed()
         if keys[K_w] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys[K_s] and self.rect.y < win_height-5:
+        if keys[K_s] and self.rect.y < 370:
             self.rect.y += self.speed
     def update_r(self):
         keys = key.get_pressed()
         if keys[K_UP] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys[K_DOWN] and self.rect.y < win_height-5:
+        if keys[K_DOWN] and self.rect.y < 370:
             self.rect.y += self.speed
 
 background = (200, 255, 255)
@@ -39,16 +39,20 @@ paddle_r = Player(25, 170, 5, "racket_0.png", 50 , 120)
 clock = time.Clock()
 FPS = 60
 game = True
+finish = False
 
 while game :
-    ball.update()
-    ball.reset()
-    paddle_l.update_l()
-    paddle_l.reset()
-    paddle_r.update_r()
-    paddle_r.reset()
     for e in event.get():
         if e.type == QUIT:
             game = False
+    if finish != True:
+        window.fill(background)
+        ball.update()
+        paddle_l.update_l()
+        paddle_r.update_r()
+        ball.reset()
+        paddle_l.reset()
+        paddle_r.reset()
+
     display.update()
     clock.tick(FPS)
