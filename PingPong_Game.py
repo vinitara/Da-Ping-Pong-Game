@@ -13,17 +13,18 @@ class GameSprite(sprite.Sprite):
         window.blit(self.image, (self.rect.x, self.rect.y))  
 
 class Player(GameSprite):
-    def update(self):
-        keys = key.get_pressed()
-        if keys[K_LEFT] and self.rect.x > 20:
-            self.rect.x -= self.speed
-        if keys[K_RIGHT] and self.rect.x < 620:
-            self.rect.x += self.speed
-    def shoot(self):
-        global num_fire
-        bullet = Bullet(self.rect.centerx, self.rect.top , -10 , "bullet.png", 20, 15)
-        num_fire += 1
-        bullets.add(bullet)
+    def update_l(self):
+        keys = key.get_presses()
+        if keys[K_w] and self.rect.y > 5:
+            self.rect.y -= self.speed
+        if keys[K_s] and self.rect.y < win_height-5:
+            self.rect.y += self.speed
+    def update_r(self):
+        keys = key.get_presses()
+        if keys[K_UP] and self.rect.y > 5:
+            self.rect.y -= self.speed
+        if keys[K_DOWN] and self.rect.y < win_height-5:
+            self.rect.y += self.speed
 
 background = (200, 255, 255)
 win_width = 600
